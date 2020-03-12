@@ -16,5 +16,12 @@
 
 package main
 
+import (
+	"github.com/paketo-buildpacks/jmx/jmx"
+	"github.com/paketo-buildpacks/libpak"
+)
+
 func main() {
+	d := jmx.Detect{}
+	libpak.Detect(d.Detect)
 }

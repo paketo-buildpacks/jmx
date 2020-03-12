@@ -19,14 +19,35 @@ package jmx_test
 import (
 	"testing"
 
+	"github.com/buildpacks/libcnb"
+	. "github.com/onsi/gomega"
+	"github.com/paketo-buildpacks/jmx/jmx"
 	"github.com/sclevine/spec"
-	"github.com/sclevine/spec/report"
 )
 
-func TestUnit(t *testing.T) {
-	suite := spec.New("jmx", spec.Report(report.Terminal{}))
-	suite("Build", testBuild)
-	suite("Detect", testDetect)
-	suite("JMX", testJMX)
-	suite.Run(t)
+func testBuild(t *testing.T, context spec.G, it spec.S) {
+	var (
+		Expect = NewWithT(t).Expect
+
+		build jmx.Build
+		ctx   libcnb.BuildContext
+	)
+
+	it("does nothing without plan", func() {
+		Expect(build.Build(ctx)).To(Equal(libcnb.BuildResult{}))
+	})
+
+	it("adds jmx to the result", func() {
+		ctx.Plan = libcnb.BuildpackPlan{
+			Entries: []libcnb.BuildpackPlanEntry{
+				{Name: "jmx"},
+			},
+		}
+
+		result, err := build.Build(ctx)
+		Expect(err).NotTo(HaveOccurred())
+
+		Expect(result.Layers).To(HaveLen(1))
+	})
+
 }

@@ -16,5 +16,12 @@
 
 package main
 
+import (
+	"github.com/paketo-buildpacks/jmx/jmx"
+	"github.com/paketo-buildpacks/libpak"
+)
+
 func main() {
+	b := jmx.NewBuild()
+	libpak.Build(b.Build)
 }
