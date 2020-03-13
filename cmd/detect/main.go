@@ -22,6 +22,5 @@ import (
 )
 
 func main() {
-	d := jmx.Detect{}
-	libpak.Detect(d.Detect)
+	libpak.Detect(jmx.Detect{})
 }

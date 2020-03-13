@@ -17,8 +17,6 @@
 package jmx
 
 import (
-	"os"
-
 	"github.com/buildpacks/libcnb"
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
@@ -30,14 +28,13 @@ type JMX struct {
 }
 
 func NewJMX(info libcnb.BuildpackInfo) JMX {
-	return JMX{
-		LayerContributor: libpak.NewLayerContributor("JMX", info),
-		Logger:           bard.NewLogger(os.Stdout),
-	}
+	return JMX{LayerContributor: libpak.NewLayerContributor("JMX", info)}
 }
 
 func (j JMX) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	j.Logger.Body(bard.FormatUserConfig("BPL_JMX_PORT", "the port the JVM will listen on", "5000"))
+
+	j.LayerContributor.Logger = j.Logger
 
 	return j.LayerContributor.Contribute(layer, func() (libcnb.Layer, error) {
 		layer.Profile.Add("jmx", `PORT=${BPL_JMX_PORT:=5000}

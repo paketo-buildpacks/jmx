@@ -17,11 +17,13 @@
 package main
 
 import (
+	"os"
+
 	"github.com/paketo-buildpacks/jmx/jmx"
 	"github.com/paketo-buildpacks/libpak"
+	"github.com/paketo-buildpacks/libpak/bard"
 )
 
 func main() {
-	b := jmx.NewBuild()
-	libpak.Build(b.Build)
+	libpak.Build(jmx.Build{Logger: bard.NewLogger(os.Stdout)})
 }
