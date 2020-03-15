@@ -1,4 +1,4 @@
-# `jmx`
+# `paketo-buildpacks/jmx`
 The Paketo JMX Buildpack is a Cloud Native Buildpack that configures JMX for JVM applications.
 
 ## Behavior
@@ -8,13 +8,13 @@ This buildpack will participate if all of the following conditions are met
 
 The buildpack will do the following:
 
-* Contribute JMX configuration to `$JAVA_OPTS` 
+* Contribute JMX configuration to `$JAVA_OPTS`
 
-## Configuration 
+## Configuration
 | Environment Variable | Description
 | -------------------- | -----------
 | `$BP_JMX_ENABLED` | Whether to contribute JMX support
-| `$BPL_JMX_PORT` | What port the JMX connector will listen on. Defaults to `5000`. 
+| `$BPL_JMX_PORT` | What port the JMX connector will listen on. Defaults to `5000`.
 
 ## Creating SSH Tunnel
 After starting an application with JMX enabled, an SSH tunnel must be created to the container.  To create that SSH container, execute the following command:
