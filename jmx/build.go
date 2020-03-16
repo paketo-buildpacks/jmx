@@ -31,8 +31,7 @@ type Build struct {
 func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 	r := libpak.PlanEntryResolver{Plan: context.Plan}
 
-	_, ok, err := r.Resolve("jmx")
-	if err != nil {
+	if _, ok, err := r.Resolve("jmx"); err != nil {
 		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve buildpack plan entry jmx\n%w", err)
 	} else if !ok {
 		return libcnb.BuildResult{}, nil
