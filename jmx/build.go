@@ -17,10 +17,7 @@
 package jmx
 
 import (
-	"fmt"
-
 	"github.com/buildpacks/libcnb"
-	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
 )
 
@@ -29,18 +26,12 @@ type Build struct {
 }
 
 func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
-	r := libpak.PlanEntryResolver{Plan: context.Plan}
-
-	if _, ok, err := r.Resolve("jmx"); err != nil {
-		return libcnb.BuildResult{}, fmt.Errorf("unable to resolve buildpack plan entry jmx\n%w", err)
-	} else if !ok {
-		return libcnb.BuildResult{}, nil
-	}
-
 	b.Logger.Title(context.Buildpack)
+	result := libcnb.BuildResult{}
 
 	j := NewJMX(context.Buildpack.Info)
 	j.Logger = b.Logger
+	result.Layers = append(result.Layers, j)
 
-	return libcnb.BuildResult{Layers: []libcnb.LayerContributor{j}}, nil
+	return result, nil
 }
