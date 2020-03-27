@@ -17,9 +17,13 @@
 package jmx
 
 import (
+	"fmt"
+
 	"github.com/buildpacks/libcnb"
+	_ "github.com/paketo-buildpacks/jmx/jmx/statik"
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
+	"github.com/paketo-buildpacks/libpak/sherpa"
 )
 
 type JMX struct {
@@ -31,23 +35,20 @@ func NewJMX(info libcnb.BuildpackInfo) JMX {
 	return JMX{LayerContributor: libpak.NewLayerContributor("JMX", info)}
 }
 
+//go:generate statik -src . -include *.sh
+
 func (j JMX) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
 	j.Logger.Body(bard.FormatUserConfig("BPL_JMX_PORT", "the port the JVM will listen on", "5000"))
 
 	j.LayerContributor.Logger = j.Logger
 
 	return j.LayerContributor.Contribute(layer, func() (libcnb.Layer, error) {
-		layer.Profile.Add("jmx", `PORT=${BPL_JMX_PORT:=5000}
+		s, err := sherpa.StaticFile("/jmx.sh")
+		if err != nil {
+			return libcnb.Layer{}, fmt.Errorf("unable to load jmx.sh\n%w", err)
+		}
 
-printf "JMX enabled on port %%s\n" "${PORT}"
-
-export JAVA_OPTS="${JAVA_OPTS}
-  -Djava.rmi.server.hostname=127.0.0.1
-  -Dcom.sun.management.jmxremote.authenticate=false
-  -Dcom.sun.management.jmxremote.ssl=false
-  -Dcom.sun.management.jmxremote.port=${PORT}
-  -Dcom.sun.management.jmxremote.rmi.port=${PORT}"
-`)
+		layer.Profile.Add("jmx.sh", s)
 
 		layer.Launch = true
 		return layer, nil
