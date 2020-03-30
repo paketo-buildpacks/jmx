@@ -27,6 +27,8 @@ type Build struct {
 
 func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 	b.Logger.Title(context.Buildpack)
+	b.Logger.Body(bard.FormatUserConfig("BPL_JMX_PORT", "the port the JVM will listen on", "5000"))
+
 	result := libcnb.BuildResult{}
 
 	j := NewJMX(context.Buildpack.Info)

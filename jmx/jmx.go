@@ -38,8 +38,6 @@ func NewJMX(info libcnb.BuildpackInfo) JMX {
 //go:generate statik -src . -include *.sh
 
 func (j JMX) Contribute(layer libcnb.Layer) (libcnb.Layer, error) {
-	j.Logger.Body(bard.FormatUserConfig("BPL_JMX_PORT", "the port the JVM will listen on", "5000"))
-
 	j.LayerContributor.Logger = j.Logger
 
 	return j.LayerContributor.Contribute(layer, func() (libcnb.Layer, error) {
