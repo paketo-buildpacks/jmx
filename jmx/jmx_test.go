@@ -18,6 +18,7 @@ package jmx_test
 
 import (
 	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/buildpacks/libcnb"
@@ -39,10 +40,14 @@ func testJMX(t *testing.T, context spec.G, it spec.S) {
 
 		ctx.Buildpack.Info.Version = "test-version"
 
-		ctx.Layers.Path, err = ioutil.TempDir("", "debug")
+		ctx.Layers.Path, err = ioutil.TempDir("", "jmx")
 		Expect(err).NotTo(HaveOccurred())
 
 		j = jmx.NewJMX(ctx.Buildpack.Info)
+	})
+
+	it.After(func() {
+		Expect(os.RemoveAll(ctx.Layers.Path)).To(Succeed())
 	})
 
 	it("contributes debug configuration", func() {
