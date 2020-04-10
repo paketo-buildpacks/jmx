@@ -16,16 +16,16 @@ The buildpack will do the following:
 | `$BP_JMX_ENABLED` | Whether to contribute JMX support
 | `$BPL_JMX_PORT` | What port the JMX connector will listen on. Defaults to `5000`.
 
-## Creating SSH Tunnel
-After starting an application with JMX enabled, an SSH tunnel must be created to the container.  To create that SSH container, execute the following command:
+## Publishing the Port
+When starting an application with JMX enabled, a port must be published.  To publish the port in Docker, use the following command:
 
 ```bash
-$ cf ssh -N -T -L <LOCAL_PORT>:localhost:<REMOTE_PORT> <APPLICATION_NAME>
+$ docker run --publish <LOCAL_PORT>:<REMOTE_PORT> ...
 ```
 
-The `REMOTE_PORT` should match the `port` configuration for the application (`5000` by default).  The `LOCAL_PORT` must match the `REMOTE_PORT`.
+The `REMOTE_PORT` should match the `port` configuration for the application (`5000` by default).  The `LOCAL_PORT` can be any open port on your computer, but typically matches the `REMOTE_PORT` where possible.
 
-Once the SSH tunnel has been created, your JConsole should connect to `localhost:<LOCAL_PORT>` for JMX access.
+Once the port has been published, your JConsole should connect to `localhost:<LOCAL_PORT>` for JMX access.
 
 ![JConsole Configuration](jconsole.png)
 
