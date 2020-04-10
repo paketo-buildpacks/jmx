@@ -1,4 +1,4 @@
-PORT=${BPL_JMX_PORT:=5000}
+PORT="${BPL_JMX_PORT:=5000}"
 
 printf "JMX enabled on port %s\n" "${PORT}"
 

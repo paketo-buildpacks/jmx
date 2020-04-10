@@ -58,7 +58,7 @@ func testJMX(t *testing.T, context spec.G, it spec.S) {
 		Expect(err).NotTo(HaveOccurred())
 
 		Expect(layer.Launch).To(BeTrue())
-		Expect(layer.Profile["jmx.sh"]).To(Equal(`PORT=${BPL_JMX_PORT:=5000}
+		Expect(layer.Profile["jmx.sh"]).To(Equal(`PORT="${BPL_JMX_PORT:=5000}"
 
 printf "JMX enabled on port %s\n" "${PORT}"
 
