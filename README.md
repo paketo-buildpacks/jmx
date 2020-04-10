@@ -2,7 +2,7 @@
 The Paketo JMX Buildpack is a Cloud Native Buildpack that configures JMX for JVM applications.
 
 ## Behavior
-This buildpack will participate if all of the following conditions are met
+This buildpack will participate if all the following conditions are met
 
 * `$BP_JMX_ENABLED` is set
 
