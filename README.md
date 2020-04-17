@@ -1,4 +1,4 @@
-# `paketo-buildpacks/jmx`
+# `gcr.io/paketo-buildpacks/jmx`
 The Paketo JMX Buildpack is a Cloud Native Buildpack that configures JMX for JVM applications.
 
 ## Behavior
