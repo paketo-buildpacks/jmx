@@ -15,9 +15,10 @@
 api = "0.2"
 
 [buildpack]
-id      = "paketo-buildpacks/jmx"
-name    = "Paketo JMX Buildpack"
-version = "{{.version}}"
+id       = "paketo-buildpacks/jmx"
+name     = "Paketo JMX Buildpack"
+version  = "{{.version}}"
+homepage = "https://github.com/paketo-buildpacks/jmx"
 
 [[stacks]]
 id = "io.buildpacks.stacks.bionic"
