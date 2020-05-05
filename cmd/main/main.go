@@ -25,5 +25,8 @@ import (
 )
 
 func main() {
-	libpak.Build(jmx.Build{Logger: bard.NewLogger(os.Stdout)})
+	libpak.Main(
+		jmx.Detect{},
+		jmx.Build{Logger: bard.NewLogger(os.Stdout)},
+	)
 }
