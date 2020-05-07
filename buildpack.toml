@@ -26,6 +26,15 @@ id = "io.buildpacks.stacks.bionic"
 [[stacks]]
 id = "org.cloudfoundry.stacks.cflinuxfs3"
 
+[[metadata.configurations]]
+name        = "BPL_JMX_PORT"
+description = "what port the JMX Connector will listen on"
+default     = "5000"
+
+[[metadata.configurations]]
+name        = "BP_JMX_ENABLED"
+description = "whether to contribute JMX support"
+
 [metadata]
 pre-package   = "scripts/build.sh"
 include-files = [

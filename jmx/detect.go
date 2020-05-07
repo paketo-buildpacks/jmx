@@ -17,15 +17,21 @@
 package jmx
 
 import (
-	"os"
+	"fmt"
 
 	"github.com/buildpacks/libcnb"
+	"github.com/paketo-buildpacks/libpak"
 )
 
 type Detect struct{}
 
 func (d Detect) Detect(context libcnb.DetectContext) (libcnb.DetectResult, error) {
-	if _, ok := os.LookupEnv("BP_JMX_ENABLED"); !ok {
+	cr, err := libpak.NewConfigurationResolver(context.Buildpack, nil)
+	if err != nil {
+		return libcnb.DetectResult{}, fmt.Errorf("unable to create configuration resolver\n%w", err)
+	}
+
+	if _, ok := cr.Resolve("BP_JMX_ENABLED"); !ok {
 		return libcnb.DetectResult{Pass: false}, nil
 	}
 
