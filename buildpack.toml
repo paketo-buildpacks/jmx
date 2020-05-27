@@ -30,10 +30,12 @@ id = "org.cloudfoundry.stacks.cflinuxfs3"
 name        = "BPL_JMX_PORT"
 description = "what port the JMX Connector will listen on"
 default     = "5000"
+launch      = true
 
 [[metadata.configurations]]
 name        = "BP_JMX_ENABLED"
 description = "whether to contribute JMX support"
+build       = true
 
 [metadata]
 pre-package   = "scripts/build.sh"
