@@ -23,8 +23,9 @@ import (
 
 	"github.com/buildpacks/libcnb"
 	. "github.com/onsi/gomega"
-	"github.com/paketo-buildpacks/jmx/jmx"
 	"github.com/sclevine/spec"
+
+	"github.com/paketo-buildpacks/jmx/jmx"
 )
 
 func testJMX(t *testing.T, context spec.G, it spec.S) {
