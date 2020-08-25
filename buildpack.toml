@@ -27,6 +27,11 @@ id = "io.buildpacks.stacks.bionic"
 id = "org.cloudfoundry.stacks.cflinuxfs3"
 
 [[metadata.configurations]]
+name        = "BPL_JMX_ENABLED"
+description = "whether to enable JMX support"
+launch      = true
+
+[[metadata.configurations]]
 name        = "BPL_JMX_PORT"
 description = "what port the JMX Connector will listen on"
 default     = "5000"
@@ -45,6 +50,7 @@ include-files = [
   "README.md",
   "bin/build",
   "bin/detect",
+  "bin/helper",
   "bin/main",
   "buildpack.toml",
   "jconsole.png",
