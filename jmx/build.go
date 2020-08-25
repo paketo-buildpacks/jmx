@@ -37,9 +37,9 @@ func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 		return libcnb.BuildResult{}, fmt.Errorf("unable to create configuration resolver\n%w", err)
 	}
 
-	j := NewJMX(context.Buildpack.Info)
-	j.Logger = b.Logger
-	result.Layers = append(result.Layers, j)
+	h := libpak.NewHelperLayerContributor(context.Buildpack, result.Plan, "jmx")
+	h.Logger = b.Logger
+	result.Layers = append(result.Layers, h)
 
 	return result, nil
 }

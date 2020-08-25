@@ -14,6 +14,7 @@ The buildpack will do the following:
 | Environment Variable | Description
 | -------------------- | -----------
 | `$BP_JMX_ENABLED` | Whether to contribute JMX support
+| `$BPL_JMX_ENABLED` | Whether to enable JMX support
 | `$BPL_JMX_PORT` | What port the JMX connector will listen on. Defaults to `5000`.
 
 ## Publishing the Port
