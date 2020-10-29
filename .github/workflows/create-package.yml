@@ -151,5 +151,5 @@ jobs:
               with:
                 address: gcr.io/paketo-buildpacks/jmx@${{ steps.package.outputs.digest }}
                 id: paketo-buildpacks/jmx
-                token: ${{ secrets.GITHUB_TOKEN }}
+                token: ${{ secrets.JAVA_BUILDPACK_REGISTRY_TOKEN }}
                 version: ${{ steps.version.outputs.version }}
