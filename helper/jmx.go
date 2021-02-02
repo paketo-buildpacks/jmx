@@ -51,7 +51,6 @@ func (j JMX) Execute() (map[string]string, error) {
 		"-Dcom.sun.management.jmxremote.ssl=false",
 		fmt.Sprintf("-Dcom.sun.management.jmxremote.port=%s", port),
 		fmt.Sprintf("-Dcom.sun.management.jmxremote.rmi.port=%s", port),
-
 	)
 
 	return map[string]string{"JAVA_TOOL_OPTIONS": strings.Join(values, " ")}, nil
