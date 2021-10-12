@@ -1,4 +1,7 @@
 # `gcr.io/paketo-buildpacks/jmx`
+**This buildpack will soon be archived, JMX functionality is now available at build time by default and can be enabled with the runtime variable `$BPL_JMX_ENABLED`. See [here](https://paketo.io/docs/howto/java/#enable-jmx) for more information.**
+
+
 The Paketo JMX Buildpack is a Cloud Native Buildpack that configures JMX for JVM applications.
 
 ## Behavior
