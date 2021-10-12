@@ -19,6 +19,8 @@ package jmx
 import (
 	"fmt"
 
+	"github.com/heroku/color"
+
 	"github.com/buildpacks/libcnb"
 	"github.com/paketo-buildpacks/libpak"
 	"github.com/paketo-buildpacks/libpak/bard"
@@ -30,6 +32,9 @@ type Build struct {
 
 func (b Build) Build(context libcnb.BuildContext) (libcnb.BuildResult, error) {
 	b.Logger.Title(context.Buildpack)
+
+	b.Logger.Headerf(color.YellowString("WARNING: This buildpack will soon be archived, JMX functionality is now available at build time by default " +
+		"and can be enabled with the runtime variable $BPL_JMX_ENABLED. See https://paketo.io/docs/howto/java/#enable-jmx for more information."))
 	result := libcnb.NewBuildResult()
 
 	_, err := libpak.NewConfigurationResolver(context.Buildpack, &b.Logger)
